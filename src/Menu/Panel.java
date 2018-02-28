@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -21,7 +22,7 @@ import javax.swing.WindowConstants;
 
 public class Panel extends JPanel{
     
-    public Image fondo, ayuda, creditos;
+    public Image fondo, ayuda, creditos, regresar, boton1, boton2;
     public int evento, x, y, time, band, tipo;
     public Boton obj;
     public Animacion personaje;
@@ -37,6 +38,9 @@ public class Panel extends JPanel{
             fondo = ImageIO.read(new File("src/Imagenes/Fondo.jpg"));
             ayuda = ImageIO.read(new File("src/Imagenes/Ayuda.png"));
             creditos = ImageIO.read(new File("src/Imagenes/Creditos.jpg"));
+            regresar = ImageIO.read(new File("src/Imagenes/boton1.png"));
+            boton1 = ImageIO.read(new File("src/Imagenes/boton1.png"));
+            boton2 = ImageIO.read(new File("src/Imagenes/boton2.png"));
         } catch (IOException e) {
             System.out.println("No se Encontro la Imagen...");
         }
@@ -59,6 +63,7 @@ public class Panel extends JPanel{
         tipo = 1;
         super.setFocusable(true);
         tiempo.start();
+        super.addMouseListener(boton);
         
     }
     
@@ -195,15 +200,54 @@ public class Panel extends JPanel{
                 break;
             case 2:
                 g2.drawImage(ayuda, 0, 0, this);
+                g2.drawImage(regresar, 700, 450, this);
                 break;
             case 3:
                 g2.drawImage(creditos, 0, 0, this);
+                g2.drawImage(regresar, 700, 450, this);
                 break;
             default:
             
         }
             
     }
+    
+    MouseListener boton = new MouseListener(){
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(e.getX() >= 700 && e.getX() <= 700 + boton1.getWidth(null) && e.getY() >= 450 && e.getY() <= 450 + boton1.getHeight(null)){
+                
+                evento = 0;
+                obj.ayuda.setVisible(true);
+                obj.creditos.setVisible(true);
+                obj.jugar.setVisible(true);
+                obj.salir.setVisible(true);
+                repaint();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+           
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            
+        }
+
+    };
     
     /**
      * Metodo eventos: asigna un entero que dependiendo de su valor, ocurrio algun evento.

@@ -19,7 +19,7 @@ public class Lienzo extends JPanel{
     public int posx_punt, posy_punt, aux_pts, vidas, time, time_mov; 
     public Personaje jug;
     public Tronco pedazo;
-    public Rama obj;
+    public Rama obj[];
     public Energia []vida;
     public Timer tiempo, mov;
     
@@ -29,7 +29,10 @@ public class Lienzo extends JPanel{
         super.addMouseListener(salto);
         jug = new Personaje();
         pedazo = new Tronco();
-        obj = new Rama();
+        obj = new Rama[5];
+        for (int i = 0; i < obj.length; i++) {
+            obj[i] = new Rama();
+        }
         vida = new Energia[41];
         for (int i = 0; i < vida.length; i++) {
             vida[i] = new Energia();
@@ -318,7 +321,9 @@ public class Lienzo extends JPanel{
         g2.drawString(this.jug.puntos, this.posx_punt, this.posy_punt);
         g2.drawImage(this.jug.pint, this.jug.x, this.jug.y, this);
         g2.drawImage(this.barra, 323, 120, this);
-        g2.drawImage(this.obj.der, 467, 207, this);
+        for (int i = 0; i < obj.length; i++) {
+            g2.drawImage(this.obj[i].der, 467 , 10 + (this.pedazo.cortado.getHeight(null)*(i)), this);
+        }
         for (int i = 0; i < vida.length; i++) {
             if(vida[i].estado){
                 if(i > 0){

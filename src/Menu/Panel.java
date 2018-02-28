@@ -258,6 +258,10 @@ public class Panel extends JPanel{
             
             public void mouseClicked(MouseEvent e){
                 
+                obj.ayuda.setVisible(false);
+                obj.creditos.setVisible(false);
+                obj.jugar.setVisible(false);
+                obj.salir.setVisible(false);
                 evento = 2;
                 repaint();
                 
@@ -283,6 +287,10 @@ public class Panel extends JPanel{
             
             public void mouseClicked(MouseEvent e){
                 
+                obj.ayuda.setVisible(false);
+                obj.creditos.setVisible(false);
+                obj.jugar.setVisible(false);
+                obj.salir.setVisible(false);
                 evento = 3;
                 repaint();
                 

@@ -15,7 +15,6 @@ public class Main {
             System.out.println(obj.obj.obj.num[i]);
             
         }*/
-        
         Pantalla obj = new Pantalla();
         obj.iniciar();
         

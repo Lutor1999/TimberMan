@@ -62,6 +62,10 @@ public class Pantalla extends JFrame{
         
     }  
     
+    /**
+     * Escuchadora de Accion (aullido):
+     * Se activara cada N segundos y reproducira un audio de fondo.
+     */
     ActionListener aullido = new ActionListener(){
 
         @Override

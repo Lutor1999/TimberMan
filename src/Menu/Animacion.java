@@ -9,6 +9,11 @@ public class Animacion {
     
     public Image ppl, der, der1, izq, izq1, pint;
     
+    /**
+     * Constructor de la Clase Animacion:
+     * Inicializa las imagenes del personaje que se estara
+     * moviendo en el menu principal.
+     */
     public Animacion(){
         
         try {

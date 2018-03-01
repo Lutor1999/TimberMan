@@ -8,9 +8,10 @@ public class Frame extends JFrame{
     
     public Lienzo obj;
     
-    public Frame(){
+    public Frame(String nombre){
         
         obj = new Lienzo();
+        obj.jug.nombre = nombre;
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
         super.setTitle("Timber Man");
         super.setBounds(0, 0, 840, 620);

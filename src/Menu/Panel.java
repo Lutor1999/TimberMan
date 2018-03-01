@@ -1,7 +1,6 @@
 package Menu;
 
 import Juego.Frame;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -15,14 +14,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.WindowConstants;
 
 public class Panel extends JPanel{
     
-    public Image fondo, ayuda, creditos, regresar, boton1, boton2;
+    public Image fondo, ayuda, creditos, regresar, boton1;
     public int evento, x, y, time, band, tipo;
     public Boton obj;
     public Animacion personaje;
@@ -40,7 +38,6 @@ public class Panel extends JPanel{
             creditos = ImageIO.read(new File("src/Imagenes/Creditos.jpg"));
             regresar = ImageIO.read(new File("src/Imagenes/boton1.png"));
             boton1 = ImageIO.read(new File("src/Imagenes/boton1.png"));
-            boton2 = ImageIO.read(new File("src/Imagenes/boton2.png"));
         } catch (IOException e) {
             System.out.println("No se Encontro la Imagen...");
         }
@@ -121,20 +118,27 @@ public class Panel extends JPanel{
                         switch(tipo){
                         
                             case 1:
+                                
                                 y = 460;
                                 personaje.pint = personaje.ppl;
                                 break;
+                                
                             case 2:
+                                
                                 y = 420;
                                 personaje.pint = personaje.der;
                                 break;
+                                
                             case 3:
+                                
                                 y = 460;
                                 personaje.pint = personaje.der1;
                                 break;
+                                
                             default:
                             
                         }
+                        
                         repaint();
                         tipo++;
                 
@@ -153,20 +157,27 @@ public class Panel extends JPanel{
                         switch(tipo){
                         
                             case 1:
+                                
                                 y = 460;
                                 personaje.pint = personaje.ppl;
                                 break;
+                                
                             case 2:
+                                
                                 y = 420;
                                 personaje.pint = personaje.izq;
                                 break;
+                                
                             case 3:
+                                
                                 y = 460;
                                 personaje.pint = personaje.izq1;
                                 break;
+                                
                             default:
                             
                         }
+                        
                         repaint();
                         tipo++;
                 
@@ -193,29 +204,43 @@ public class Panel extends JPanel{
         switch(evento){
             
             case 0:
+                
                 g2.drawImage(this.fondo,0,0,this);
                 g2.drawImage(personaje.pint, x, y, this);
                 break;
+                
             case 1:
+                
                 break;
+                
             case 2:
+                
                 g2.drawImage(ayuda, 0, 0, this);
                 g2.drawImage(regresar, 700, 450, this);
                 break;
+                
             case 3:
+                
                 g2.drawImage(creditos, 0, 0, this);
                 g2.drawImage(regresar, 700, 450, this);
                 break;
+                
             default:
             
         }
             
     }
     
+    /**
+     * Escuchadora de Mouse (boton):
+     * Se accionara cada vez que el usuario haya
+     * entrado en alguna parte del menu diferente a jugar o salir.
+     */
     MouseListener boton = new MouseListener(){
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            
             if(e.getX() >= 700 && e.getX() <= 700 + boton1.getWidth(null) && e.getY() >= 450 && e.getY() <= 450 + boton1.getHeight(null)){
                 
                 evento = 0;
@@ -224,7 +249,9 @@ public class Panel extends JPanel{
                 obj.jugar.setVisible(true);
                 obj.salir.setVisible(true);
                 repaint();
+                
             }
+            
         }
 
         @Override
@@ -277,8 +304,9 @@ public class Panel extends JPanel{
             
             public void mouseClicked(MouseEvent e){
                 
+                String nombre = JOptionPane.showInputDialog("Ingrese su nombre:");
                 setVisible(false);
-                Frame obj = new Frame();
+                Frame obj = new Frame(nombre);
                 
             }
             

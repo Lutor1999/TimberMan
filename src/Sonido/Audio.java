@@ -11,14 +11,20 @@ import sun.audio.ContinuousAudioDataStream;
 
 public class Audio {
     
-    public String fondo;
+    public String fondo, hachazo;
     
     public Audio(){
         
         fondo = "src/Audios/fondo.wav";
+        hachazo = "src/Audios/hachazo.wav";
         
     }
     
+    /**
+     * Metodo sonidoContinuo:
+     * recibe un argumento de tipo string en donde estara
+     * la ruta del audio a reproducir infinitamente.
+     */
     public void sonidoContinuo(String tipo){
         
         try {
@@ -31,6 +37,12 @@ public class Audio {
         
     }
     
+    /**
+     * Metodo sonido:
+     * recibe un argumento de tipo string en donde estara
+     * la ruta del audio a reproducir pero este se reproducira
+     * solo una vez.
+     */
     public void sonido(String tipo) throws FileNotFoundException, IOException{
         
         InputStream in = new FileInputStream(tipo);

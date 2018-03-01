@@ -9,7 +9,7 @@ public class Tronco {
     
     public int x, y;
     public boolean rama;
-    public Image cortado;
+    public Image cortado, vacio, der, izq, vacioder, vacioizq;
     
     /**
      * Constructor de la clase Tronco:
@@ -24,7 +24,14 @@ public class Tronco {
         y = 462;
         rama = false;
         try {
+            
             cortado = ImageIO.read(new File("src/Imagenes/Juego/Tronco.png"));
+            vacio = ImageIO.read(new File("src/Imagenes/Juego/Tronco.png"));
+            vacioder = ImageIO.read(new File("src/Imagenes/Juego/CortadoDerecha.png"));
+            vacioizq = ImageIO.read(new File("src/Imagenes/Juego/CortadoIzquierda.png"));
+            der = ImageIO.read(new File("src/Imagenes/Juego/CortadoRamaDerecha.png"));
+            izq = ImageIO.read(new File("src/Imagenes/Juego/CortadoRamaIzquierda.png"));
+            
         } catch (IOException ex) {
             System.out.println("No se Encontro la Imagen...");
         }

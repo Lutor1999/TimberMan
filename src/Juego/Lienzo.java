@@ -25,18 +25,24 @@ public class Lienzo extends JPanel{
     public Tronco pedazo;
     public Rama obj[];
     public Energia []vida;
-    public Timer tiempo, mov, des, des1;
+    public Timer tiempo, mov, des, des1, bajar;
     public Audio sonido;
     public boolean live;
     public String muerte;
     
+    /**
+     * Constructor de la Clase Lienzo:
+     * Inicializa todos los atributos de la clase, agrega los eventos,
+     * llama a los metodos de esta misma clase (inicializar_vidas y 
+     * generar_ramas) inicia los Timers correspondientes.
+     */
     public Lienzo(){
         
         super.setFocusable(true);
         super.addMouseListener(salto);
         jug = new Personaje();
         pedazo = new Tronco();
-        obj = new Rama[500];
+        obj = new Rama[5];
         sonido = new Audio();
         live = true;
         for (int i = 0; i < obj.length; i++) {
@@ -54,6 +60,7 @@ public class Lienzo extends JPanel{
         mov = new Timer(50,mov_personaje);
         des = new Timer(50,desplazar);
         des1 = new Timer(50,desplazarizquierda);
+        bajar = new Timer(50,bajada);
         posx_punt = 400;
         posy_punt = 232;
         i = 0;
@@ -81,6 +88,23 @@ public class Lienzo extends JPanel{
         
     }
     
+    ActionListener bajada = new ActionListener(){
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            for (int j = 0; j < obj.length; j++) {
+                
+                obj[j].y += 105;
+                
+            }
+            
+            repaint();
+            bajar.stop();
+            
+        }
+
+    };    
     /**
      * Escuchadora de Accion (desplazar):
      * Genera el efecto de desplazamiento del pedazo de tronco cortado,
@@ -158,37 +182,43 @@ public class Lienzo extends JPanel{
      * 2 = asigna una rama izquierda;.
      */
     public void colocar_ramas(){
+         
+        int aux1 = 0;
         
-        for(int j = 0; j < num.length; j++){
+        do{
             
-            switch(num[j]){
+            switch(num[aux1]){
                 
                 case 0:
                     
-                    obj[j].rama = obj[j].vacia;
-                    obj[j].x = 198;
-                    obj[j].y = 630 - (105*(j+1));
+                    obj[aux1].rama = obj[aux1].vacia;
+                    obj[aux1].x = 220;
+                    obj[aux1].y -= 100*aux1;
                     break;
-                    
+                
                 case 1:
                     
-                    obj[j].rama = obj[j].der;
-                    obj[j].x = 467;
-                    obj[j].y = obj[j-1].y - (105*(j+1));
+                    obj[aux1].rama = obj[aux1].der;
+                    obj[aux1].x = 368;
+                    obj[aux1].y -= 100*aux1;
                     break;
                     
                 case 2:
                     
-                    obj[j].rama = obj[j].izq;
-                    obj[j].x = 198;
-                    obj[j].y = obj[j-1].y - (105*(j+1));
+                    obj[aux1].rama = obj[aux1].izq;
+                    obj[aux1].x = 198;
+                    obj[aux1].y -= 100*aux1;
                     break;
                     
                 default:
                     
             }
             
-        }
+            aux1++;
+            
+        }while(aux1 < obj.length);
+        
+        repaint();
         
     }
     
@@ -256,11 +286,13 @@ public class Lienzo extends JPanel{
             if(time%5 == 0){
                 
                 vidas--;
+                
                 for (int i = vidas; i < vida.length; i++) {
                     
                     vida[i].estado = false;
                     
                 }
+                
                 repaint();
                 
             }
@@ -392,13 +424,6 @@ public class Lienzo extends JPanel{
                         System.out.println("No se Encontro el Audio...");
                     }
                     
-                    for (int j = i; j < obj.length; j++) {
-                        
-                        obj[j].y += 105;
-                        repaint();
-                        
-                    }
-                    
                     jug.posicion = true;
                     aux_pts++;
                     mov.restart();
@@ -427,6 +452,7 @@ public class Lienzo extends JPanel{
                             
                     }
                     
+                    bajar.start();
                     i++;
                     
                 }else{
@@ -453,14 +479,7 @@ public class Lienzo extends JPanel{
                     } catch (IOException ex) {
                         System.out.println("No se Encontro el Audio...");
                     }
-                    
-                    for (int j = i; j < obj.length; j++) {
-                        
-                        obj[j].y += 105;
-                        repaint();
-                        
-                    }
-
+                    bajar.start();
                     jug.posicion = false;
                     aux_pts++;
                     mov.restart();

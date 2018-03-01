@@ -31,6 +31,9 @@ public class Rama {
             System.out.println("No se Encontro la Imagen...");
         }
         
+        x = 440;
+        y = 220;
+        
     }
     
 }

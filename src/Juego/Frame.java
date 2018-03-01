@@ -8,6 +8,13 @@ public class Frame extends JFrame{
     
     public Lienzo obj;
     
+    /**
+     * Constructor de Frame:
+     * Inicializa un objeto de tipo Lienzo que sera el encargado 
+     * de contener todos los componentes.
+     * @param nombre sirve para asignar el nombre del jugador a un objeto 
+     * de la clase Personaje.
+     */
     public Frame(String nombre){
         
         obj = new Lienzo();
